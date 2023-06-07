@@ -6,6 +6,7 @@ process NORMALIZE {
 
     output:
     path 'pbmc3k_normalized.rds', emit: rds
+    path 'DimensionPlot.png'
 
     script:
     """#!/usr/bin/env Rscript
@@ -34,6 +35,14 @@ pbmc <- FindClusters(pbmc, resolution = 0.5)
 # If you haven't installed UMAP, you can do so via reticulate::py_install(packages =
 # 'umap-learn')
 pbmc <- RunUMAP(pbmc, dims = 1:10)
+
+# Create Dimension Plots
+pca <- DimPlot(pbmc, reduction = "pca")
+umap <- DimPlot(pbmc, reduction = "umap")
+
+png(filename = "DimensionPlot.png", res = 200, width = 1600, height = 1000)
+pca + umap
+dev.off()
 
 saveRDS(pbmc, file = "pbmc3k_normalized.rds")
 
