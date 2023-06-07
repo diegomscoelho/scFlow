@@ -17,14 +17,14 @@ params.outdir = "results"
 //     """
 //     .stripIndent()
 
-include { CREATE } from "$baseDir/nf_modules/create.nf"
+include { CREATE    } from "$baseDir/nf_modules/create.nf"
 include { NORMALIZE } from "$baseDir/nf_modules/normalize.nf"
-include { MARKERS } from "$baseDir/nf_modules/find_markers.nf"
+include { MARKERS   } from "$baseDir/nf_modules/find_markers.nf"
 
 workflow {
-    create_ch = CREATE(params.data_dir)
-    normalize_ch = NORMALIZE(create_ch.rds)
-    markers_ch = MARKERS(normalize_ch.rds)
+    create_ch =     CREATE(params.data_dir)
+    normalize_ch =  NORMALIZE(create_ch.rds)
+    markers_ch =    MARKERS(normalize_ch.rds)
  }
 
 workflow.onComplete {
