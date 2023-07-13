@@ -1,3 +1,3 @@
-# scMonocle
+# scFlow
 
-Creating a nextflow pipeline version of Seurat vignette example
+Nextflow pipelines to generate scData based data.
